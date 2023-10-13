@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Modal from '../Modal/Modal';
 import { Item, Img } from './ImageGalleryItem.styled';
 
-
 class ImageItem extends Component {
   state = {
     showModal: false, 
@@ -17,7 +16,7 @@ class ImageItem extends Component {
   };
 
   render() {
-    const { showModal } = this.state; 
+    const { showModal } = this.state;
     const { image } = this.props; 
 
     return (
@@ -25,14 +24,14 @@ class ImageItem extends Component {
         <Item>
           <Img
             src={image.webformatURL} 
-            alt={image.tags} 
+            alt={image.tags}
             onClick={this.toggleModal} 
           />
           {showModal && ( 
             <Modal
               largeImageURL={image.largeImageURL} 
               tags={image.tags} 
-              onClose={this.toggleModal}
+              onClose={this.toggleModal} 
             />
           )}
         </Item>

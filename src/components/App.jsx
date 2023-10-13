@@ -1,12 +1,14 @@
 import { Component } from 'react';
+import * as API from '../components/PixabayApi';
 import SearchBar from './Searchbar/SearchBar';
 import ImageGallery from './ImageGallery/ImageGallery';
-// import Loader from '../Loader/Loader';
-// import Button from '../Button/Button';
+import Loader from './Loader/Loader';
+import Button from './Button/Button';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
+ 
   state = {
     searchName: '', 
     images: [], 
@@ -16,56 +18,57 @@ class App extends Component {
     totalPages: 0, 
   };
 
-  // Meтод життєвого циклу
+ 
   componentDidUpdate(_, prevState) {
+    
     if (
       prevState.searchName !== this.state.searchName ||
       prevState.currentPage !== this.state.currentPage
     ) {
-      this.addImages(); 
+      this.addImages();
     }
   }
 
-  // Метод загрузки
+  
   loadMore = () => {
     this.setState(prevState => ({
       currentPage: prevState.currentPage + 1,
     }));
   };
 
-  // Метод для обробки відправки форми
+  
   handleSubmit = query => {
     this.setState({
-      searchName: query, 
+      searchName: query,
       images: [], 
-      currentPage: 1, 
+      currentPage: 1,
     });
   };
 
-  // Метод для отримання і добавлення images
+  
   addImages = async () => {
     const { searchName, currentPage } = this.state;
     try {
-      this.setState({ isLoading: true }); // Устанавливаем флаг загрузки
+      this.setState({ isLoading: true });
 
-      // Получаем данные с помощью API запроса к Pixabay
-      const data = await API.getImages(searchName, currentPage);
+     
+    const data = await API.getImages(searchName, currentPage);
 
       if (data.hits.length === 0) {
-        // Если изображения не найдены, выводим сообщение
+      
         return toast.info('Sorry image not found...', {
           position: toast.POSITION.TOP_RIGHT,
         });
       }
 
-     
+      
       const normalizedImages = API.normalizedImages(data.hits);
 
       this.setState(state => ({
         images: [...state.images, ...normalizedImages], 
         isLoading: false, 
         error: '', 
-        totalPages: Math.ceil(data.totalHits / 12), 
+        totalPages: Math.ceil(data.totalHits / 12),
       }));
     } catch (error) {
       this.setState({ error: 'Something went wrong!' }); 
@@ -91,7 +94,7 @@ class App extends Component {
               fontSize: 30,
             }}
           >
-            Image gallery is empty... 
+            Image gallery is empty...
           </p>
         )}
         {isLoading && <Loader />}

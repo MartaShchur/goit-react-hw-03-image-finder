@@ -30,7 +30,6 @@ class SearchBar extends Component{
             <header>
                 <SearchForm onSubmit={this.handleSubmit}>
                     <SearchButton>
-                        <BsSearch />
                         <SearchSpan>Search</SearchSpan>
                     </SearchButton>
                     <SearchInput
