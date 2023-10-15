@@ -13,11 +13,11 @@ export const ButtonLoad = styled.button`
   border-radius: 8px;
   cursor: pointer;
   color: black;
-  background-color: gainsboro;
+  background-color: #5d89e9;
 
   &:hover,
   &:focus {
     color: black;
-    background-color: rgba(255, 255, 126, 1);
+    background-color: #e3e314;
   }
 `;

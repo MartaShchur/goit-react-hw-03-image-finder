@@ -18,9 +18,7 @@ class App extends Component {
     totalPages: 0, 
   };
 
- 
   componentDidUpdate(_, prevState) {
-    
     if (
       prevState.searchName !== this.state.searchName ||
       prevState.currentPage !== this.state.currentPage
@@ -29,14 +27,12 @@ class App extends Component {
     }
   }
 
-  
   loadMore = () => {
     this.setState(prevState => ({
       currentPage: prevState.currentPage + 1,
     }));
   };
 
-  
   handleSubmit = query => {
     this.setState({
       searchName: query,
@@ -45,14 +41,13 @@ class App extends Component {
     });
   };
 
-  
   addImages = async () => {
     const { searchName, currentPage } = this.state;
     try {
       this.setState({ isLoading: true });
 
      
-    const data = await API.getImages(searchName, currentPage);
+  const data = await API.getImages(searchName, currentPage);
 
       if (data.hits.length === 0) {
       
@@ -61,8 +56,7 @@ class App extends Component {
         });
       }
 
-      
-      const normalizedImages = API.normalizedImages(data.hits);
+  const normalizedImages = API.normalizedImages(data.hits);
 
       this.setState(state => ({
         images: [...state.images, ...normalizedImages], 

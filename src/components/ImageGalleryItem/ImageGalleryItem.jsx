@@ -8,7 +8,6 @@ class ImageItem extends Component {
     showModal: false, 
   };
 
-  
   toggleModal = () => {
     this.setState(({ showModal }) => ({
       showModal: !showModal, 
@@ -18,7 +17,6 @@ class ImageItem extends Component {
   render() {
     const { showModal } = this.state;
     const { image } = this.props; 
-
     return (
       <>
         <Item>
