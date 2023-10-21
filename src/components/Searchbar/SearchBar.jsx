@@ -9,7 +9,6 @@ import {
 
 class SearchBar extends Component{
     state = {
-        searchName: '',
         inputValue: '',
     };
 
@@ -19,12 +18,11 @@ class SearchBar extends Component{
 
     handleSubmit = event => {
         event.preventDefault();
-        const searchQuery = event.target.elements.searchName.value.trim();
-        this.props.onSubmit(searchQuery);
-        event.target.reset();
+        this.props.onSubmit(this.state.inputValue);
+        this.setState.inputValue('');
     };
 
-
+    
     render() {
         return (
             <header>
@@ -39,11 +37,9 @@ class SearchBar extends Component{
                         value={this.state.inputValue}
                         onChange={this.handleChange}
                     />
-                    
                 </SearchForm>
             </header>
         );
-    
     }
 }
 
